@@ -46,10 +46,20 @@ def play_hangman(word):
             print('The word to guess: ' + display + ', ' + str(limit-count) + ' Guess remaining')
         else:
             print('The word to guess: ' + display + ', ' + str(limit-count) + ' Guesses remaining')
-
-        letter = input('Guess a letter :')
+        print('Letters guessed already: '+str(letters_guessed))
+        
+        letter = ''
+        while len(letter)>1:
+            letter = input('Guess a letter :')
+            print('You need to input one character. Try again')
+            time.sleep(1)
+            delete_last_lines(1)
+            
+        
         if letter in letters_guessed:
             print('Letter checked already. Guess again')
+            time.sleep(1)
+            delete_last_lines(4)
             continue
         letters_guessed.append(letter)
 
@@ -58,7 +68,7 @@ def play_hangman(word):
             for index,value in enumerate(word): # fills the display with the letter guessed
                 if letter.lower() == value:
                     display = display[:index] + letter + display[index+1:]
-            delete_last_lines(2)
+            delete_last_lines(3)
         else:
             print('Sorry, the letter doesnt exist.')
             os.system('cls')
