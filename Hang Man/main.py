@@ -72,6 +72,7 @@ def play_hangman(word):
             delete_last_lines(3)
         else:
             print('Sorry, the letter doesnt exist.')
+            time.sleep(1)
             os.system('cls')
             count+=1
             match count:
