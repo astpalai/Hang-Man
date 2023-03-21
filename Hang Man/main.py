@@ -48,12 +48,13 @@ def play_hangman(word):
             print('The word to guess: ' + display + ', ' + str(limit-count) + ' Guesses remaining')
         print('Letters guessed already: '+str(letters_guessed))
         
-        letter = ''
-        while len(letter)>1:
+        while True:
             letter = input('Guess a letter :')
+            if len(letter) == 1:
+                break
             print('You need to input one character. Try again')
             time.sleep(1)
-            delete_last_lines(1)
+            delete_last_lines(2)
             
         
         if letter in letters_guessed:
