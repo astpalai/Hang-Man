@@ -1,48 +1,154 @@
 
 import os
+import sys
 import time
 import random
 
+
+CURSOR_UP_ONE = '\x1b[1A' 
+ERASE_LINE = '\x1b[2K'
+def delete_last_lines(n=1): 
+    for _ in range(n): 
+        sys.stdout.write(CURSOR_UP_ONE) 
+        sys.stdout.write(ERASE_LINE)
+
 def play_again():
-    pass
+    answer = ''
+    while answer.lower() != 'y' or answer.lower() != 'n':
+        answer = input('\nWould you like to play again (y/n)')
+        if answer == 'y':
+            os.system('cls')
+            return True
+        elif answer == 'n':
+            os.system('cls')
+            return False
+        else:
+            print('Incorrect input. Try again \n')
+            time.sleep(2)
+            os.system('cls')
 
 def play_hangman(word):
     display = '_'*len(word)
+    letters_guessed = []
     count = 0
     limit = 6
 
-    while limit:
-        if limit == 6:
-            print('   _____  \n'
-                  '  |     | \n'
-                  '  |     | \n'
-                  '  |       \n'
-                  '  |       \n'
-                  '  |       \n'
-                  '  |       \n'
-                  '__|__\n')
-            print('The word to guess: ' + display)
-            print('Guesses remaining: ' + str(limit))
+    print('   _____  \n'
+          '  |     | \n'
+          '  |     | \n'
+          '  |        \n'
+          '  |        \n'
+          '  |        \n'
+          '  |        \n'
+          '__|__      \n')
 
-        time.sleep(3)
-        limit-=1
+    while count<limit:
+        if limit-count == 1:
+            print('The word to guess: ' + display + ', ' + str(limit-count) + ' Guess remaining')
+        else:
+            print('The word to guess: ' + display + ', ' + str(limit-count) + ' Guesses remaining')
+
+        letter = input('Guess a letter :')
+        if letter in letters_guessed:
+            print('Letter checked already. Guess again')
+            continue
+        letters_guessed.append(letter)
+
+
+        if letter in word:        
+            for index,value in enumerate(word): # fills the display with the letter guessed
+                if letter.lower() == value:
+                    display = display[:index] + letter + display[index+1:]
+            delete_last_lines(2)
+        else:
+            print('Sorry, the letter doesnt exist.')
+            os.system('cls')
+            count+=1
+            match count:
+                case 1:
+                    print('   _____   \n'
+                          '  |     |  \n'
+                          '  |     |  \n'
+                          '  |     O  \n'
+                          '  |        \n'
+                          '  |        \n'
+                          '  |        \n'
+                          '__|__      \n')
+                    
+                case 2:
+                    print('   _____   \n'
+                          '  |     |  \n'
+                          '  |     |  \n'
+                          '  |     O  \n'
+                          '  |     |  \n'
+                          '  |        \n'
+                          '  |        \n'
+                          '__|__      \n')
+
+                case 3:
+                    print('   _____   \n'
+                          '  |     |  \n'
+                          '  |     |  \n'
+                          '  |     O  \n'
+                          '  |    /|  \n'
+                          '  |        \n'
+                          '  |        \n'
+                          '__|__      \n')
+
+                case 4:
+                    print('   _____   \n'
+                          '  |     |  \n'
+                          '  |     |  \n'
+                          '  |     O  \n'
+                          '  |    /|\ \n'
+                          '  |        \n'
+                          '  |        \n'
+                          '__|__      \n')
+
+                case 5:
+                    print('   _____   \n'
+                          '  |     |  \n'
+                          '  |     |  \n'
+                          '  |     O  \n'
+                          '  |    /|\ \n'
+                          '  |    /   \n'
+                          '  |        \n'
+                          '__|__      \n')
+                case 6:
+                    print('   _____   \n'
+                          '  |     |  \n'
+                          '  |     |  \n'
+                          '  |     O  \n'
+                          '  |    /|\ \n'
+                          '  |    / \ \n'
+                          '  |        \n'
+                          '__|__      \n')
+                    print('YOU LOST,the word was '+ word)
+                    break
+        if display == word:
+            print('YOU WON,the word was '+ word)
+            break
     
-
-    
-
-
 
 def hangman():
     #print('Welcome to hangman.')
     #time.sleep(1)
-    #print('Game is about to start.')
+    #print('The game is about to start.')
     #time.sleep(1)
     #print('Best of luck!! \n')
     #time.sleep(1)
 
-    words_to_guess = ['january', 'feb', 'march', 'april', 'may']
-    word = random.choice(words_to_guess)
-    play_hangman(word)
+    words_to_guess = ['january']
+
+    play = True
+    while play:
+        word = random.choice(words_to_guess)
+        play_hangman(word)
+        play = play_again()
+
+    print('Thanks For Playing! Hope to see you again!')
+    time.sleep(3)
+    exit()
 
 
 
