@@ -1,4 +1,3 @@
-
 import os
 import sys
 import time
@@ -131,14 +130,18 @@ def play_hangman(word):
     
 
 def hangman():
-    #print('Welcome to hangman.')
-    #time.sleep(1)
-    #print('The game is about to start.')
-    #time.sleep(1)
-    #print('Best of luck!! \n')
-    #time.sleep(1)
+    print('Welcome to hangman.')
+    time.sleep(1)
+    print('The game is about to start.')
+    time.sleep(1)
+    print('Best of luck!! \n')
+    time.sleep(2)
+    os.system('cls')
 
-    words_to_guess = ['january']
+    words_to_guess = ['tenacious', 'repristinate', 'eruct', 'gul', 'alluvion' , 'superannuated',
+     'rasorial', 'lambent', 'caravel', 'gridiron', 'aorta', 'quixotic', 'bulwark', 'syzygy', 'modus ponens',
+      'pizazz', 'nonpartisan', 'romaji', 'skijoring', 'ejecta', 'vellicate', 'cranreuch', 'oppugn', 'oolong',
+       'vigesimal']
 
     play = True
     while play:
