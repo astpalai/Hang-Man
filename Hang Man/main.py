@@ -11,17 +11,25 @@ def play_hangman(word):
     count = 0
     limit = 6
 
-    print('   _____  \n'
-          '  |     | \n'
-          '  |     | \n'
-          '  |       \n'
-          '  |       \n'
-          '  |       \n'
-          '  |       \n'
-          '__|__\n')
-    print('The word to guess: ' + display)
-    print('Guesses remaining: ' + str(limit))
-    #teeeeest
+    while limit:
+        if limit == 6:
+            print('   _____  \n'
+                  '  |     | \n'
+                  '  |     | \n'
+                  '  |       \n'
+                  '  |       \n'
+                  '  |       \n'
+                  '  |       \n'
+                  '__|__\n')
+            print('The word to guess: ' + display)
+            print('Guesses remaining: ' + str(limit))
+
+        time.sleep(3)
+        limit-=1
+    
+
+    
+
 
     
 
