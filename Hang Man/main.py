@@ -31,7 +31,6 @@ def play_hangman(word):
     
 
 
-    #thanos was here
 
 def hangman():
     #print('Welcome to hangman.')
